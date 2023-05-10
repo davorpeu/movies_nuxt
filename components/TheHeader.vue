@@ -1,15 +1,13 @@
 <template>
   <div>
-    <button @click="toggleSidebar">hamburger</button>
+    <button @click="$emit('input', !value)">hamburger</button>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {
-    toggleSidebar() {
-      this.$emit('toggleSidebar')
-    }
+  props: {
+    value: Boolean
   }
 }
 </script>
