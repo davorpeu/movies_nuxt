@@ -1,13 +1,17 @@
 <template>
   <div>
-    <button>hamburger</button>
-    <a href="/">Home</a>
-    <a href="/movies">Movies</a>
+    <button @click="toggleSidebar">hamburger</button>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  methods: {
+    toggleSidebar() {
+      this.$emit('toggleSidebar')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>

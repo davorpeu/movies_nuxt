@@ -1,14 +1,27 @@
 <template>
   <div>
-    <TheHeader></TheHeader>
+    <TheHeader @toggleSidebar="showSidebar = !showSidebar"></TheHeader>
+    <Sidebar v-if="showSidebar"></Sidebar>
     <nuxt />
   </div>
 </template>
 <script>
 import TheHeader from '../components/TheHeader.vue'
+import Sidebar from '../components/Sidebar.vue'
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    Sidebar
+  },
+  data() {
+    return {
+      showSidebar: false
+    }
+  },
+  methods: {
+    toggleSidebar() {
+      this.showSidebar = !this.showSidebar
+    }
   }
 }
 </script>
@@ -59,5 +72,12 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.sidebar {
+  width: 0;
+}
+.show-sidebar .sidebar {
+  width: 20%;
 }
 </style>
