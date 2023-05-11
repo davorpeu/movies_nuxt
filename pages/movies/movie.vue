@@ -1,7 +1,9 @@
 <template>
   <li>
-    <slot></slot><button>detalji</button>
-    <NuxtLink v-if="movie" :to="`/movies/${movie.id}`">detalji</NuxtLink>
+    <slot></slot>
+    <NuxtLink :to="{ name: 'movies-id', params: { id: movie.id } }"
+      >Detalji</NuxtLink
+    >
   </li>
 </template>
 
