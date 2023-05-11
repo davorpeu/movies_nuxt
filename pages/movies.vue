@@ -2,7 +2,9 @@
   <div>
     <h1>Movies</h1>
     <ul>
-      <movie v-for="movie in movies" :key="movie.id">{{ movie.title }}</movie>
+      <movie v-for="movie in movies" :key="movie.id" :movie="movie">{{
+        movie.title
+      }}</movie>
     </ul>
   </div>
 </template>
@@ -19,17 +21,16 @@ export default {
       movies: []
     }
   },
-  async fetch() {
-    await axios
-      .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
-      )
-      .then((response) => {
-        this.movies = response.data.results
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+  async created() {
+    const API_KEY = process.env.API_KEY
+    const axiosInstance = axios.create({
+      baseURL: `https://api.themoviedb.org/3/movie/`,
+      params: {
+        api_key: API_KEY
+      }
+    })
+    const response = await axiosInstance.get('popular')
+    this.movies = response.data.results
   }
 }
 </script>

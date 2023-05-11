@@ -1,12 +1,17 @@
 <template>
   <li>
     <slot></slot><button>detalji</button>
-    <NuxtLink to="/movies/id">detalji</NuxtLink>
+    <NuxtLink v-if="movie" :to="`/movies/${movie.id}`">detalji</NuxtLink>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'movie'
+  props: {
+    movie: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>
