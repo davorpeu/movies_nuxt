@@ -2,9 +2,10 @@ import Vuex from 'vuex'
 
 const store = () =>
   new Vuex.Store({
-    state: {
-      wishlist: []
-    },
+    state: () => ({
+      wishlist: JSON.parse(localStorage.getItem('wishlist')) || []
+    }),
+
     mutations: {
       addItem(state, item) {
         state.wishlist.push(item)
