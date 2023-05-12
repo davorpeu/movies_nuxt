@@ -4,12 +4,12 @@
     <NuxtLink :to="{ name: 'movies-id', params: { id: movie.id } }"
       >Detalji</NuxtLink
     >
-    <button @click="addToWishlist">Add to Wishlist</button>
+    <button v-if="!isInWishlist" @click="addToWishlist">Add to Wishlist</button>
+    <button v-else @click="removeFromWishlist">Remove from Wishlist</button>
   </li>
 </template>
-
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 export default {
   props: {
     movie: {
@@ -17,10 +17,19 @@ export default {
       required: true
     }
   },
+  computed: {
+    ...mapState('wishlist', ['wishlist']),
+    isInWishlist() {
+      return this.wishlist.some((item) => item.id === this.movie.id)
+    }
+  },
   methods: {
-    ...mapMutations('wishlist', ['addItem']),
+    ...mapMutations('wishlist', ['addItem', 'removeItem']),
     addToWishlist() {
       this.addItem(this.movie)
+    },
+    removeFromWishlist() {
+      this.removeItem(this.movie)
     }
   }
 }
