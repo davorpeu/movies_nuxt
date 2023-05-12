@@ -4,10 +4,12 @@ import wishlist from './modules/wishlist'
 
 Vue.use(Vuex)
 
-export default function() {
+const store = () => {
   return new Vuex.Store({
     modules: {
       wishlist
     }
   })
 }
+
+export default store
