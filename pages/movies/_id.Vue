@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>Favorite</div>
     {{ movie.title }}
   </div>
 </template>
