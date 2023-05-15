@@ -2,6 +2,7 @@
   <div>
     <TheHeader v-model="showSidebar"></TheHeader>
     <Sidebar v-show="showSidebar"></Sidebar>
+
     <nuxt />
   </div>
 </template>
@@ -13,11 +14,17 @@ export default {
     TheHeader,
     Sidebar
   },
+
   data() {
     return {
-      showSidebar: false,
-      sdsada: true
+      showSidebar: false
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      setTimeout(() => this.$nuxt.$loading.finish(), 500)
+    })
   }
 }
 </script>

@@ -52,7 +52,6 @@ export default {
   created() {
     this.isLoading = false
   },
-
   methods: {
     nextPage() {
       this.currentPage++

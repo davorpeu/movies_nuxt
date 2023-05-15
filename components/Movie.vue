@@ -28,7 +28,12 @@ export default {
       return this.wishlist.some((item) => item.id === this.movie.id)
     }
   },
-
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      setTimeout(() => this.$nuxt.$loading.finish(), 500)
+    })
+  },
   methods: {
     ...mapMutations('wishlist', ['addItem', 'removeItem']),
     addToWishlist() {
