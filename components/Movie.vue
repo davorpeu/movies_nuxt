@@ -1,11 +1,23 @@
 <template>
-  <li>
+  <li class="flex-row items-center">
     <slot></slot>
     <NuxtLink :to="{ name: 'movies-id', params: { id: movie.id } }"
       >Details</NuxtLink
     >
-    <button v-if="!isInWishlist" @click="addToWishlist">Add to Wishlist</button>
-    <button v-else @click="removeFromWishlist">Remove from Wishlist</button>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      v-if="!isInWishlist"
+      @click="addToWishlist"
+    >
+      Add to Wishlist
+    </button>
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      v-else
+      @click="removeFromWishlist"
+    >
+      Remove from Wishlist
+    </button>
   </li>
 </template>
 

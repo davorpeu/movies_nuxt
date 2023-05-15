@@ -1,14 +1,36 @@
 <template>
   <div>
-    <h1>Movies</h1>
-    <ul>
-      <Movie v-for="movie in displayedMovies" :key="movie.id" :movie="movie">{{
-        movie.title
-      }}</Movie>
-    </ul>
-    <div>
-      <button v-if="currentPage > 1" @click="previousPage">Previous</button>
-      <button v-if="currentPage < totalPages" @click="nextPage">Next</button>
+    <h1
+      class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center"
+    >
+      Movies
+    </h1>
+    <div class="flex flex-col items-center">
+      <ul class="list-none flex flex-col ">
+        <Movie
+          v-for="movie in displayedMovies"
+          :key="movie.id"
+          :movie="movie"
+          >{{ movie.title }}</Movie
+        >
+      </ul>
+    </div>
+
+    <div class="flex flex-wrap justify-center">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        v-if="currentPage > 1"
+        @click="previousPage"
+      >
+        Previous
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        v-if="currentPage < totalPages"
+        @click="nextPage"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>

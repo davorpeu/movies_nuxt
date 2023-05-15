@@ -6,7 +6,7 @@
         <Movie v-if="!isLoading" :movie="movie">{{ movie.title }}</Movie>
       </li>
     </ul>
-    <div>
+    <div class="flex items-center">
       <button v-if="currentPage > 1" @click="previousPage">Previous</button>
       <button v-if="currentPage < totalPages" @click="nextPage">Next</button>
     </div>
