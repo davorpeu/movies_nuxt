@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
     <div
-      class="p-2 space-y-2 bg-gray-600 rounded shadow w-fit"
+      class="p-2 space-y-2 bg-gray-600 rounded shadow w-fit m-auto"
       @click="$emit('input', !value)"
     >
       <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
