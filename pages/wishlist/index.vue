@@ -2,9 +2,9 @@
   <div>
     <h1>Wishlist</h1>
     <ul>
-      <Movie v-for="movie in displayedMovies" :key="movie.id" :movie="movie">{{
-        movie.title
-      }}</Movie>
+      <li v-for="movie in displayedMovies" :key="movie.id">
+        <Movie v-if="!isLoading" :movie="movie">{{ movie.title }}</Movie>
+      </li>
     </ul>
     <div>
       <button v-if="currentPage > 1" @click="previousPage">Previous</button>
@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 import Movie from '@/components/Movie.vue'
 
 export default {
@@ -22,27 +24,35 @@ export default {
   },
   data() {
     return {
-      wishlistMovies: [],
       currentPage: 1,
-      moviesPerPage: 3
+      moviesPerPage: 4,
+      isLoading: true,
+      key: 1 // add a key to force re-render
     }
   },
   computed: {
+    ...mapState({
+      wishlistMovies: (state) => (state.wishlist ? state.wishlist.wishlist : [])
+    }),
     displayedMovies() {
+      if (this.moviesPerPage >= this.wishlistMovies.length) {
+        return this.wishlistMovies
+      }
+
       const startIndex = (this.currentPage - 1) * this.moviesPerPage
       const endIndex = startIndex + this.moviesPerPage
       return this.wishlistMovies.slice(startIndex, endIndex)
     },
+
     totalPages() {
       return Math.ceil(this.wishlistMovies.length / this.moviesPerPage)
     }
   },
+
   created() {
-    if (typeof localStorage !== 'undefined') {
-      const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]')
-      this.wishlistMovies = wishlist
-    }
+    this.isLoading = false
   },
+
   methods: {
     nextPage() {
       this.currentPage++
@@ -51,12 +61,6 @@ export default {
     previousPage() {
       this.currentPage--
       this.$router.push({ query: { page: this.currentPage } })
-    }
-  },
-  mounted() {
-    const queryPage = parseInt(this.$route.query.page)
-    if (queryPage && queryPage > 0 && queryPage <= this.totalPages) {
-      this.currentPage = queryPage
     }
   }
 }

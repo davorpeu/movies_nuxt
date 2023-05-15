@@ -15,15 +15,15 @@ export default {
   computed: {
     ...mapState('wishlist', ['wishlistCount', 'wishlist'])
   },
-  created() {
-    this.$store.dispatch('wishlist/init')
-  },
   watch: {
     wishlistCount(newCount) {
       if (process.browser) {
         localStorage.setItem('wishlistCount', newCount)
       }
     }
+  },
+  created() {
+    this.$store.dispatch('wishlist/init')
   },
   methods: {
     ...mapMutations('wishlist', ['setWishlistCount'])

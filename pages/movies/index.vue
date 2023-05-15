@@ -50,6 +50,12 @@ export default {
     const response = await axiosInstance.get('popular')
     this.movies = response.data.results
   },
+  mounted() {
+    const queryPage = parseInt(this.$route.query.page)
+    if (queryPage && queryPage > 0 && queryPage <= this.totalPages) {
+      this.currentPage = queryPage
+    }
+  },
   methods: {
     nextPage() {
       this.currentPage++
@@ -58,12 +64,6 @@ export default {
     previousPage() {
       this.currentPage--
       this.$router.push({ query: { page: this.currentPage } })
-    }
-  },
-  mounted() {
-    const queryPage = parseInt(this.$route.query.page)
-    if (queryPage && queryPage > 0 && queryPage <= this.totalPages) {
-      this.currentPage = queryPage
     }
   }
 }
