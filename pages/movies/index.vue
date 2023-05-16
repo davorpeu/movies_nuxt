@@ -6,7 +6,7 @@
       Movies
     </h1>
     <div class="flex flex-col items-center">
-      <ul class="list-none flex flex-col ">
+      <ul class="list-none flex flex-col">
         <Movie
           v-for="movie in displayedMovies"
           :key="movie.id"
@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Movie from '@/components/Movie.vue'
 
 export default {
@@ -61,15 +60,7 @@ export default {
     }
   },
   async created() {
-    const API_KEY = process.env.API_KEY
-    const axiosInstance = axios.create({
-      baseURL: `https://api.themoviedb.org/3/movie/`,
-      params: {
-        api_key: API_KEY,
-        sort_by: 'popularity.desc'
-      }
-    })
-    const response = await axiosInstance.get('popular')
+    const response = await this.$axiosInstance.get('popular')
     this.movies = response.data.results
   },
   mounted() {

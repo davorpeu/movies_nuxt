@@ -8,16 +8,16 @@
     </ul>
     <div class="flex items-center">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         v-if="currentPage > 1"
         @click="previousPage"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Previous
       </button>
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         v-if="currentPage < totalPages"
         @click="nextPage"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
         Next
       </button>
