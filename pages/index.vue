@@ -1,38 +1,40 @@
 <template>
   <div class="container">
     <div>
-      <uibutton>Hello</uibutton>
-      <logo />
-      <h1 class="title">
-        movies
-      </h1>
-      <h2 class="subtitle">
-        movie project gaus
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+      <Form :formTitle="formTitle" :formFields="formFields" />
+      <auth></auth>
     </div>
   </div>
 </template>
 
 <script>
-import uibutton from '../components/uibutton.vue'
-
-import Logo from '~/components/Logo.vue'
+import auth from '../layouts/auth.vue'
+import Form from '@/components/Form.vue'
 export default {
   components: {
-    Logo,
-    uibutton
+    auth,
+    Form
+  },
+  data() {
+    return {
+      formTitle: 'Contact Form',
+      formFields: [
+        {
+          id: 'name',
+          label: 'Name',
+          type: 'text',
+          value: '',
+          placeholder: 'Enter your name'
+        },
+        {
+          id: 'email',
+          label: 'Email',
+          type: 'email',
+          value: '',
+          placeholder: 'Enter your email'
+        }
+      ]
+    }
   }
 }
 </script>
