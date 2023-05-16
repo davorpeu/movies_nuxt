@@ -65,6 +65,11 @@ export default {
   created() {
     this.isLoading = false
   },
+  head() {
+    return {
+      title: 'Wishlist'
+    }
+  },
   methods: {
     nextPage() {
       this.currentPage++
