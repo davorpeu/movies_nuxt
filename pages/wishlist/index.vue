@@ -14,6 +14,7 @@
       >
         Previous
       </button>
+
       <button
         v-if="currentPage < totalPages"
         @click="nextPage"

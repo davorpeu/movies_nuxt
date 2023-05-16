@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <div>
+      <uibutton>Hello</uibutton>
       <logo />
       <h1 class="title">
         movies
@@ -25,11 +26,13 @@
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import uibutton from '../components/uibutton.vue'
 
+import Logo from '~/components/Logo.vue'
 export default {
   components: {
-    Logo
+    Logo,
+    uibutton
   }
 }
 </script>
