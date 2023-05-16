@@ -7,8 +7,20 @@
       </li>
     </ul>
     <div class="flex items-center">
-      <button v-if="currentPage > 1" @click="previousPage">Previous</button>
-      <button v-if="currentPage < totalPages" @click="nextPage">Next</button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        v-if="currentPage > 1"
+        @click="previousPage"
+      >
+        Previous
+      </button>
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        v-if="currentPage < totalPages"
+        @click="nextPage"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>

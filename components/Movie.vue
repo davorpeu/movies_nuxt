@@ -1,7 +1,9 @@
 <template>
   <li class="flex-row items-center">
     <slot></slot>
-    <NuxtLink :to="{ name: 'movies-id', params: { id: movie.id } }"
+    <NuxtLink
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      :to="{ name: 'movies-id', params: { id: movie.id } }"
       >Details</NuxtLink
     >
     <button
