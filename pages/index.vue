@@ -1,40 +1,84 @@
 <template>
   <div class="container">
     <div>
-      <Form :formTitle="formTitle" :formFields="formFields" />
-      <auth></auth>
+      <Form
+        :formTitle="formTitle"
+        :formFields="formFields"
+        :formActions="formActions"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import auth from '../layouts/auth.vue'
 import Form from '@/components/Form.vue'
 export default {
   components: {
-    auth,
     Form
   },
   data() {
     return {
-      formTitle: 'Contact Form',
+      formTitle: 'Log In',
       formFields: [
         {
-          id: 'name',
-          label: 'Name',
+          id: 'username',
+          label: 'user',
           type: 'text',
           value: '',
-          placeholder: 'Enter your name'
+          placeholder: 'Enter your username'
         },
         {
-          id: 'email',
-          label: 'Email',
-          type: 'email',
+          id: 'password',
+          label: 'Password',
+          type: 'password',
           value: '',
-          placeholder: 'Enter your email'
+          placeholder: 'Enter your password'
+        }
+      ],
+      formActions: [
+        {
+          id: 'login',
+          label: 'login'
         }
       ]
     }
+  },
+  methods: {
+    submitForm() {
+      // Perform form submission logic here
+      if (
+        this.formFields.id('username') &&
+        this.formFields.id('password' !== null)
+      ) {
+        console.log('Form submitted:', this.formFields)
+      } else {
+        console.log('Form not submitted:')
+      }
+    }
+  },
+  mounted() {
+    const existingUsersJson = this.$cookies.get('users')
+    let existingUsers = []
+    if (existingUsers) {
+      try {
+        existingUsers = JSON.parse(existingUsersJson)
+        if (!Array.isArray(existingUsers)) {
+          existingUsers = []
+        }
+      } catch (error) {
+        console.error('error parrsing users JSON', error)
+        existingUsers = []
+      }
+    }
+    const newUser = {
+      username: `admin`,
+      password: `admin`
+    }
+    existingUsers.push(newUser)
+
+    const updatedUsersJson = JSON.stringify(existingUsers)
+    this.$cookies.set('users', updatedUsersJson)
+    console.log(this.$cookies.get('users'))
   }
 }
 </script>

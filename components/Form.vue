@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <form class="form">
+    <form class="form" v-on:submit.prevent>
       <h2 class="form-title">{{ formTitle }}</h2>
 
       <div v-for="field in formFields" :key="field.id" class="form-row">
@@ -14,16 +14,21 @@
         />
       </div>
 
-      <div class="form-actions">
-        <button class="form-button" @click.prevent="submitForm">Submit</button>
-        <button class="form-button" @click.prevent="resetForm">Reset</button>
+      <div v-for="field in formActions" :key="field.id" class="form-actions">
+        <uibutton class="form-button" @click="submitForm()"
+          ><label :for="field.id" class="button-label">{{ field.label }}</label>
+        </uibutton>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+import uibutton from './uibutton.vue'
 export default {
+  components: {
+    uibutton
+  },
   props: {
     formTitle: {
       type: String,
@@ -32,13 +37,13 @@ export default {
     formFields: {
       type: Array,
       required: true
+    },
+    formActions: {
+      type: Array,
+      required: true
     }
   },
   methods: {
-    submitForm() {
-      // Perform form submission logic here
-      console.log('Form submitted:', this.formFields)
-    },
     resetForm() {
       // Reset form field values
       this.formFields.forEach((field) => {
@@ -93,12 +98,11 @@ export default {
 
 .form-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .form-button {
   padding: 10px 20px;
-  margin-left: 10px;
   font-size: 16px;
   font-weight: bold;
   color: #fff;
