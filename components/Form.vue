@@ -15,11 +15,18 @@
       </div>
 
       <div v-for="field in formActions" :key="field.id" class="form-actions">
-        <uibutton class="form-button" @click="submitForm()"
-          ><label :for="field.id" class="button-label">{{ field.label }}</label>
+        <uibutton class="form-button" type="submit">
+          <label :for="field.id" class="button-label">{{ field.label }}</label>
         </uibutton>
       </div>
     </form>
+
+    <Snackbar
+      v-if="snackbarVisible"
+      :message="snackbarMessage"
+      :visible="snackbarVisible"
+      @close="snackbarVisible = false"
+    />
   </div>
 </template>
 
@@ -42,18 +49,18 @@ export default {
     formActions: {
       type: Array,
       required: true
-    },
-    submitForm: {
-      type: Function,
-      required: true
+    }
+  },
+  data() {
+    return {
+      snackbarVisible: false,
+      snackbarMessage: ''
     }
   },
   methods: {
-    resetForm() {
-      // Reset form field values
-      this.formFields.forEach((field) => {
-        field.value = ''
-      })
+    submitForm() {
+      // Handle form submission
+      this.$emit('submitForm')
     }
   }
 }
@@ -119,5 +126,17 @@ export default {
 
 .form-button:hover {
   background-color: #0056b3;
+}
+
+.snackbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  opacity: 0.9;
 }
 </style>

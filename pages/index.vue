@@ -5,18 +5,26 @@
         :formTitle="formTitle"
         :formFields="formFields"
         :formActions="formActions"
-        :submitForm="submitForm"
+        @submitForm="submitForm"
       />
     </div>
+    <Snackbar
+      v-if="snackbarVisible"
+      :message="snackbarMessage"
+      :visible="snackbarVisible"
+      @close="snackbarVisible = false"
+    />
   </div>
 </template>
 
 <script>
 import Form from '@/components/Form.vue'
+import Snackbar from '@/components/Snackbar.vue'
 
 export default {
   components: {
-    Form
+    Form,
+    Snackbar
   },
   data() {
     return {
@@ -43,25 +51,41 @@ export default {
           label: 'Login'
         }
       ],
+      snackbarVisible: false,
+      snackbarMessage: '',
       existingUsers: [] // Define the existingUsers array in the data section
     }
   },
   methods: {
     submitForm() {
-      const username = this.formFields.find((field) => field.id === 'username')
-        .value
-      const password = this.formFields.find((field) => field.id === 'password')
-        .value
+      const usernameField = this.formFields.find(
+        (field) => field.id === 'username'
+      )
+      const passwordField = this.formFields.find(
+        (field) => field.id === 'password'
+      )
+
+      const username = usernameField.value
+      const password = passwordField.value
+
+      // Check if fields are empty or have incorrect format
+      if (!username || !password) {
+        console.log('sadasd')
+        this.snackbarMessage = 'Please enter both username and password.'
+        this.snackbarVisible = true
+        return
+      }
 
       const user = this.existingUsers.find(
         (u) => u.username === username && u.password === password
       )
       if (user) {
-        // Authentication successful
         console.log('Authentication successful')
+        this.snackbarMessage = 'Authentication successful'
+        this.snackbarVisible = true
       } else {
-        // Authentication failed
-        console.log('Invalid username or password')
+        this.snackbarMessage = 'Invalid username or password.'
+        this.snackbarVisible = true
       }
     }
   },
@@ -79,6 +103,7 @@ export default {
           }
         }
       } else {
+        // Set the default user when existingUsersJson is empty or not an array
         const newUser = {
           username: 'admin',
           password: 'admin'
