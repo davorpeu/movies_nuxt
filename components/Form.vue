@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <form class="form" v-on:submit.prevent>
+    <form class="form" @submit.prevent="submitForm">
       <h2 class="form-title">{{ formTitle }}</h2>
 
       <div v-for="field in formFields" :key="field.id" class="form-row">
@@ -25,6 +25,7 @@
 
 <script>
 import uibutton from './uibutton.vue'
+
 export default {
   components: {
     uibutton
@@ -40,6 +41,10 @@ export default {
     },
     formActions: {
       type: Array,
+      required: true
+    },
+    submitForm: {
+      type: Function,
       required: true
     }
   },
