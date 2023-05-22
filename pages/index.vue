@@ -68,6 +68,7 @@ export default {
   mounted() {
     try {
       const existingUsersJson = this.$cookies.get('users')
+
       if (existingUsersJson) {
         if (Array.isArray(existingUsersJson)) {
           this.existingUsers = existingUsersJson
@@ -77,18 +78,18 @@ export default {
             this.existingUsers = []
           }
         }
+      } else {
+        const newUser = {
+          username: 'admin',
+          password: 'admin'
+        }
+        this.existingUsers.push(newUser)
       }
     } catch (error) {
       console.error('Error parsing users JSON:', error)
       this.existingUsers = []
     }
-    /*
-    const newUser = {
-      username: `admin`,
-      password: `admin`
-    }
-    this.existingUsers.push(newUser)
-    */
+
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
   }
