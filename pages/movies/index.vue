@@ -39,6 +39,7 @@
 import Movie from '@/components/Movie.vue'
 
 export default {
+  auth: true,
   components: {
     Movie
   },

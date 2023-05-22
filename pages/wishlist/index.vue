@@ -32,6 +32,7 @@ import { mapState } from 'vuex'
 import Movie from '@/components/Movie.vue'
 
 export default {
+  auth: true,
   components: {
     Movie
   },

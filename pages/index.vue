@@ -18,10 +18,12 @@
 </template>
 
 <script>
+import { login } from '@/services/auth.js'
+
 import Form from '@/components/Form.vue'
 import Snackbar from '@/components/Snackbar.vue'
-
 export default {
+  auth: true,
   components: {
     Form,
     Snackbar
@@ -70,7 +72,6 @@ export default {
 
       // Check if fields are empty or have incorrect format
       if (!username || !password) {
-        console.log('sadasd')
         this.snackbarMessage = 'Please enter both username and password.'
         this.snackbarVisible = true
         return
@@ -79,10 +80,21 @@ export default {
       const user = this.existingUsers.find(
         (u) => u.username === username && u.password === password
       )
+
       if (user) {
         console.log('Authentication successful')
         this.snackbarMessage = 'Authentication successful'
         this.snackbarVisible = true
+
+        // Call the login method from the auth service and pass the validated value
+        login(username, password, true)
+          .then(() => {
+            // Redirect to the desired route
+            this.$router.push('/movies') // Replace '/dashboard' with the desired route
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       } else {
         this.snackbarMessage = 'Invalid username or password.'
         this.snackbarVisible = true
