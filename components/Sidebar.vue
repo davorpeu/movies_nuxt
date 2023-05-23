@@ -19,15 +19,39 @@
           href="/wishlist"
           >Wishlist</a
         >
+        <button
+          v-if="isAuthenticated"
+          @click="logout"
+          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
+import { logout } from '@/plugins/auth'
 export default {
   setup() {
-    return {}
+    const isAuthenticated = true // Replace with the actual check for authentication status
+
+    const handleLogout = () => {
+      logout()
+        .then(() => {
+          // Redirect to the login page or any other desired location
+          window.location.href = '/'
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
+
+    return {
+      isAuthenticated,
+      logout: handleLogout
+    }
   }
 }
 </script>

@@ -32,7 +32,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/axios.js', mode: 'client' }],
+  plugins: [
+    { src: '~/plugins/axios.js', mode: 'client' },
+    { src: '~/plugins/auth.js', ssr: false }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

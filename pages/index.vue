@@ -18,12 +18,9 @@
 </template>
 
 <script>
-import { login } from '@/services/auth.js'
-
 import Form from '@/components/Form.vue'
 import Snackbar from '@/components/Snackbar.vue'
 export default {
-  auth: true,
   components: {
     Form,
     Snackbar
@@ -34,7 +31,7 @@ export default {
       formFields: [
         {
           id: 'username',
-          label: 'user',
+          label: 'Username',
           type: 'text',
           value: '',
           placeholder: 'Enter your username'
@@ -55,7 +52,7 @@ export default {
       ],
       snackbarVisible: false,
       snackbarMessage: '',
-      existingUsers: [] // Define the existingUsers array in the data section
+      existingUsers: []
     }
   },
   methods: {
@@ -70,7 +67,6 @@ export default {
       const username = usernameField.value
       const password = passwordField.value
 
-      // Check if fields are empty or have incorrect format
       if (!username || !password) {
         this.snackbarMessage = 'Please enter both username and password.'
         this.snackbarVisible = true
@@ -82,15 +78,13 @@ export default {
       )
 
       if (user) {
-        console.log('Authentication successful')
-        this.snackbarMessage = 'Authentication successful'
-        this.snackbarVisible = true
-
-        // Call the login method from the auth service and pass the validated value
-        login(username, password, true)
+        this.$auth
+          .login(username, password)
           .then(() => {
-            // Redirect to the desired route
-            this.$router.push('/movies') // Replace '/dashboard' with the desired route
+            console.log('Authentication successful')
+            this.snackbarMessage = 'Authentication successful'
+            this.snackbarVisible = true
+            this.$router.push('/movies')
           })
           .catch((error) => {
             console.error(error)
@@ -102,6 +96,18 @@ export default {
     }
   },
   mounted() {
+    try {
+      const isValidToken = this.$auth.checkAuthStatus(this.$cookies)
+      if (isValidToken) {
+        this.$router.push('/movies')
+      } else {
+        this.$router.push('/')
+      }
+    } catch (error) {
+      console.error('Error parsing users JSON:', error)
+      this.existingUsers = []
+    }
+
     try {
       const existingUsersJson = this.$cookies.get('users')
 
@@ -115,12 +121,11 @@ export default {
           }
         }
       } else {
-        // Set the default user when existingUsersJson is empty or not an array
         const newUser = {
           username: 'admin',
           password: 'admin'
         }
-        this.existingUsers.push(newUser)
+        this.existingUsers = [newUser] // Create a new array with the new user object
       }
     } catch (error) {
       console.error('Error parsing users JSON:', error)
@@ -129,6 +134,7 @@ export default {
 
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
+    this.$cookies.set('authToken', '') // Remove the 'authToken' cookie
   }
 }
 </script>

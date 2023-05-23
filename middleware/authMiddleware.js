@@ -1,12 +1,9 @@
-import { checkAuthStatus } from '@/services/auth'
-
-export default function({ route, redirect }) {
-  const isAuthenticated = checkAuthStatus()
+export default function({ req, route, redirect }) {
+  const isAuthenticated = req.cookies && req.cookies.authToken
 
   if (!isAuthenticated) {
-    // User is not authenticated, redirect them to the login page
     if (route.path !== '/') {
-      return redirect('/') // Replace '/login' with the actual login page route
+      return redirect('/')
     }
   }
 }
