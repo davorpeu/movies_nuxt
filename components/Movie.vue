@@ -7,15 +7,15 @@
       >Details</NuxtLink
     >
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       v-if="!isInWishlist"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       @click="addToWishlist"
     >
       Add to Wishlist
     </button>
     <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       v-else
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       @click="removeFromWishlist"
     >
       Remove from Wishlist

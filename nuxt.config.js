@@ -19,7 +19,7 @@ export default {
   },
 
   router: {
-    middleware: ['authMiddleware']
+    middleware: ['auth']
   },
   /*
    ** Customize the progress-bar color
@@ -46,16 +46,43 @@ export default {
   /*
    ** Nuxt.js modules
    */
+  serverMiddleware: [
+    // ...
+
+    // Add the API route
+    { path: '/api/auth', handler: '~/api/auth/login.js' }
+  ],
 
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    '@nuxtjs/auth-next'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
-   */
+   */ auth: {
+    strategies: {
+      cookie: {
+        cookie: {
+          // (optional) If set, we check this cookie existence for loggedIn check
+          name: 'XSRF-TOKEN'
+        },
+        endpoints: {
+          // (optional) If set, we send a get request to this endpoint before login
+          csrf: {
+            url: ''
+          }
+        }
+      }
+    },
+    redirect: {
+      login: '/',
+      logout: '/',
+      home: '/movies'
+    }
+  },
   axios: {},
   /*
    ** Build configuration

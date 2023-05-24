@@ -7,8 +7,8 @@
         <label :for="field.id" class="form-label">{{ field.label }}</label>
         <input
           :id="field.id"
-          :type="field.type"
           v-model="field.value"
+          :type="field.type"
           :placeholder="field.placeholder"
           class="form-input"
         />

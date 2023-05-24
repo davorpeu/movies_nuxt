@@ -18,15 +18,15 @@
 
     <div class="flex flex-wrap justify-center">
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         v-if="currentPage > 1"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         @click="previousPage"
       >
         Previous
       </button>
       <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         v-if="currentPage < totalPages"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         @click="nextPage"
       >
         Next

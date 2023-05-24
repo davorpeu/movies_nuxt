@@ -21,8 +21,8 @@
         >
         <button
           v-if="isAuthenticated"
-          @click="logout"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          @click="logout"
         >
           Logout
         </button>
@@ -32,20 +32,14 @@
 </template>
 
 <script>
-import { logout } from '@/plugins/auth'
 export default {
   setup() {
     const isAuthenticated = true // Replace with the actual check for authentication status
 
     const handleLogout = () => {
-      logout()
-        .then(() => {
-          // Redirect to the login page or any other desired location
-          window.location.href = '/'
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      // Perform the logout action
+      // Redirect to the login page or any other desired location
+      window.location.href = '/'
     }
 
     return {

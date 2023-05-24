@@ -2,9 +2,9 @@
   <div class="container">
     <div>
       <Form
-        :formTitle="formTitle"
-        :formFields="formFields"
-        :formActions="formActions"
+        :form-title="formTitle"
+        :form-fields="formFields"
+        :form-actions="formActions"
         @submitForm="submitForm"
       />
     </div>
@@ -20,7 +20,9 @@
 <script>
 import Form from '@/components/Form.vue'
 import Snackbar from '@/components/Snackbar.vue'
+
 export default {
+  auth: false,
   components: {
     Form,
     Snackbar
@@ -55,49 +57,9 @@ export default {
       existingUsers: []
     }
   },
-  methods: {
-    submitForm() {
-      const usernameField = this.formFields.find(
-        (field) => field.id === 'username'
-      )
-      const passwordField = this.formFields.find(
-        (field) => field.id === 'password'
-      )
-
-      const username = usernameField.value
-      const password = passwordField.value
-
-      if (!username || !password) {
-        this.snackbarMessage = 'Please enter both username and password.'
-        this.snackbarVisible = true
-        return
-      }
-
-      const user = this.existingUsers.find(
-        (u) => u.username === username && u.password === password
-      )
-
-      if (user) {
-        this.$auth
-          .login(username, password)
-          .then(() => {
-            console.log('Authentication successful')
-            this.snackbarMessage = 'Authentication successful'
-            this.snackbarVisible = true
-            this.$router.push('/movies')
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-      } else {
-        this.snackbarMessage = 'Invalid username or password.'
-        this.snackbarVisible = true
-      }
-    }
-  },
   mounted() {
     try {
-      const isValidToken = this.$auth.checkAuthStatus(this.$cookies)
+      const isValidToken = false /* this.$auth.checkAuthStatus(this.$cookies) */
       if (isValidToken) {
         this.$router.push('/movies')
       } else {
@@ -134,7 +96,39 @@ export default {
 
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
-    this.$cookies.set('authToken', '') // Remove the 'authToken' cookie
+  },
+  methods: {
+    submitForm() {
+      const usernameField = this.formFields.find(
+        (field) => field.id === 'username'
+      )
+      const passwordField = this.formFields.find(
+        (field) => field.id === 'password'
+      )
+
+      const username = usernameField.value
+      const password = passwordField.value
+
+      if (!username || !password) {
+        this.snackbarMessage = 'Please enter both username and password.'
+        this.snackbarVisible = true
+        return
+      }
+
+      this.$auth
+        .login(username, password)
+        .then(() => {
+          console.log('Authentication successful')
+          this.snackbarMessage = 'Authentication successful'
+          this.snackbarVisible = true
+          this.$router.push('/movies')
+        })
+        .catch((error) => {
+          console.error(error)
+          this.snackbarMessage = 'Invalid username or password.'
+          this.snackbarVisible = true
+        })
+    }
   }
 }
 </script>

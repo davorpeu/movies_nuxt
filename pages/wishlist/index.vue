@@ -9,16 +9,16 @@
     <div class="flex items-center">
       <button
         v-if="currentPage > 1"
-        @click="previousPage"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="previousPage"
       >
         Previous
       </button>
 
       <button
         v-if="currentPage < totalPages"
-        @click="nextPage"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="nextPage"
       >
         Next
       </button>
@@ -66,11 +66,6 @@ export default {
   created() {
     this.isLoading = false
   },
-  head() {
-    return {
-      title: 'Wishlist'
-    }
-  },
   methods: {
     nextPage() {
       this.currentPage++
@@ -79,6 +74,11 @@ export default {
     previousPage() {
       this.currentPage--
       this.$router.push({ query: { page: this.currentPage } })
+    }
+  },
+  head() {
+    return {
+      title: 'Wishlist'
     }
   }
 }

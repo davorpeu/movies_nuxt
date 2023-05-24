@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'uibutton',
+  name: 'UiButton',
   props: {
     color: {
       type: String,
@@ -43,36 +43,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.button {
-  /* Button styles */
-}
-
-.button-primary {
-  /* Primary button styles */
-}
-
-.button-secondary {
-  /* Secondary button styles */
-}
-
-.button-small {
-  /* Small button styles */
-}
-
-.button-medium {
-  /* Medium button styles */
-}
-
-.button-large {
-  /* Large button styles */
-}
-
-.button-outlined {
-  /* Outlined button styles */
-}
-
-.button-disabled {
-  /* Disabled button styles */
-}
-</style>
+<style scoped></style>
