@@ -1,6 +1,6 @@
 import { get } from 'lodash'
 
-export default function(req) {
+export default function(req, res) {
   // Mock authentication logic
 
   const { username, password } = req.body
