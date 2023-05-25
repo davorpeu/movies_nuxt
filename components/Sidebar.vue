@@ -5,6 +5,7 @@
         class="flex flex-col fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
       >
         <a
+          v-if="!true == this.$auth.loggedIn"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           href="/"
           >Home</a
@@ -20,7 +21,7 @@
           >Wishlist</a
         >
         <button
-          v-if="isAuthenticated"
+          v-if="this.$auth.loggedIn"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           @click="logout"
         >
@@ -34,8 +35,6 @@
 <script>
 export default {
   setup() {
-    const isAuthenticated = true // Replace with the actual check for authentication status
-
     const handleLogout = () => {
       // Perform the logout action
       // Redirect to the login page or any other desired location
@@ -43,7 +42,6 @@ export default {
     }
 
     return {
-      isAuthenticated,
       logout: handleLogout
     }
   }

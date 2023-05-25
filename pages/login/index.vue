@@ -5,7 +5,7 @@
         :form-title="formTitle"
         :form-fields="formFields"
         :form-actions="formActions"
-        @submitForm="submitForm"
+        @submitForm="userLogin"
       />
     </div>
     <Snackbar
@@ -59,11 +59,12 @@ export default {
   },
   mounted() {
     try {
-      const isValidToken = false /* this.$auth.checkAuthStatus(this.$cookies) */
-      if (isValidToken) {
+      const isLoggedIn = this.$auth
+        .loggedIn /* this.$auth.checkAuthStatus(this.$cookies) */
+      if (isLoggedIn) {
         this.$router.push('/movies')
       } else {
-        this.$router.push('/')
+        this.$router.push('/login')
       }
     } catch (error) {
       console.error('Error parsing users JSON:', error)
@@ -96,38 +97,18 @@ export default {
 
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
+    this.$auth.setUser(this.existingUsers)
   },
   methods: {
-    submitForm() {
-      const usernameField = this.formFields.find(
-        (field) => field.id === 'username'
-      )
-      const passwordField = this.formFields.find(
-        (field) => field.id === 'password'
-      )
-
-      const username = usernameField.value
-      const password = passwordField.value
-
-      if (!username || !password) {
-        this.snackbarMessage = 'Please enter both username and password.'
-        this.snackbarVisible = true
-        return
+    async userLogin() {
+      try {
+        const response = await this.$auth.loginWith('local', {
+          data: this.login
+        })
+        console.log(response)
+      } catch (err) {
+        console.log(err)
       }
-
-      this.$auth
-        .login(username, password)
-        .then(() => {
-          console.log('Authentication successful')
-          this.snackbarMessage = 'Authentication successful'
-          this.snackbarVisible = true
-          this.$router.push('/movies')
-        })
-        .catch((error) => {
-          console.error(error)
-          this.snackbarMessage = 'Invalid username or password.'
-          this.snackbarVisible = true
-        })
     }
   }
 }

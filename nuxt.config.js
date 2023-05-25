@@ -46,12 +46,6 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  serverMiddleware: [
-    // ...
-
-    // Add the API route
-    { path: '/api/auth', handler: '~/api/auth/login.js' }
-  ],
 
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
@@ -64,23 +58,19 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */ auth: {
     strategies: {
-      cookie: {
-        cookie: {
-          // (optional) If set, we check this cookie existence for loggedIn check
-          name: 'XSRF-TOKEN'
-        },
+      local: {
         endpoints: {
-          // (optional) If set, we send a get request to this endpoint before login
-          csrf: {
-            url: ''
+          login: { url: '/sessions', method: 'post', propertyName: 'token' },
+          logout: false,
+          user: {
+            url: '/sessions/user',
+            method: 'get',
+            propertyName: 'data.attributes'
           }
-        }
+        },
+        // tokenRequired: true,
+        tokenType: ''
       }
-    },
-    redirect: {
-      login: '/',
-      logout: '/',
-      home: '/movies'
     }
   },
   axios: {},
