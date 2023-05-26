@@ -5,7 +5,6 @@
         :form-title="formTitle"
         :form-fields="formFields"
         :form-actions="formActions"
-        @submitForm="userLogin"
       />
     </div>
     <Snackbar
@@ -59,19 +58,6 @@ export default {
   },
   mounted() {
     try {
-      const isLoggedIn = this.$auth
-        .loggedIn /* this.$auth.checkAuthStatus(this.$cookies) */
-      if (isLoggedIn) {
-        this.$router.push('/movies')
-      } else {
-        this.$router.push('/login')
-      }
-    } catch (error) {
-      console.error('Error parsing users JSON:', error)
-      this.existingUsers = []
-    }
-
-    try {
       const existingUsersJson = this.$cookies.get('users')
 
       if (existingUsersJson) {
@@ -99,18 +85,7 @@ export default {
     this.$cookies.set('users', updatedUsersJson)
     this.$auth.setUser(this.existingUsers)
   },
-  methods: {
-    async userLogin() {
-      try {
-        const response = await this.$auth.loginWith('local', {
-          data: this.login
-        })
-        console.log(response)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 

@@ -18,9 +18,7 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  router: {
-    middleware: ['auth']
-  },
+  router: {},
   /*
    ** Customize the progress-bar color
    */
@@ -59,17 +57,13 @@ export default {
    */ auth: {
     strategies: {
       local: {
-        endpoints: {
-          login: { url: '/sessions', method: 'post', propertyName: 'token' },
-          logout: false,
-          user: {
-            url: '/sessions/user',
-            method: 'get',
-            propertyName: 'data.attributes'
-          }
-        },
+        login: { url: '/sessions', method: 'post', propertyName: 'token' },
+        logout: false,
+        user: {
+          property: false,
+          autoFetch: false
+        }
         // tokenRequired: true,
-        tokenType: ''
       }
     }
   },

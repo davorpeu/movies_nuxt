@@ -9,6 +9,15 @@ const store = () => {
     modules: {
       wishlist
     }
+    /* actions: {
+      nuxtServerInit({ commit }, { req }) {
+        if (req.session.user) {
+          commit('user', req.session.user)
+        } else {
+          return
+        }
+      }
+    } */
   })
 }
 

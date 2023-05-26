@@ -8,7 +8,7 @@
       <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
       <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
     </div>
-    <span v-if="$auth.loggedIn >= 0">({{ $auth.user }})</span>
+    <span v-if="$auth.loggedIn >= 0">{{ $auth.user }}</span>
 
     <span v-if="wishlist.length >= 0">({{ wishlistCount }})</span>
   </div>

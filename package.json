@@ -15,7 +15,8 @@
     "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.3.6",
     "cookie-universal-nuxt": "^2.2.2",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "vue-simple-spinner": "^1.2.10"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
