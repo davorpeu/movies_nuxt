@@ -7,8 +7,8 @@
         <a
           v-if="!true == this.$auth.loggedIn"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-          href="/"
-          >Home</a
+          href="/login"
+          >Login</a
         >
         <a
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"

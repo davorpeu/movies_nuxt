@@ -5,6 +5,7 @@
         :form-title="formTitle"
         :form-fields="formFields"
         :form-actions="formActions"
+        :submitForm="submitForm"
       />
     </div>
     <Snackbar
@@ -83,9 +84,31 @@ export default {
 
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
+
     this.$auth.setUser(this.existingUsers)
   },
-  methods: {}
+  methods: {
+    submitForm() {
+      /*
+      const succesfulLogin = await this.$auth.loginWith('local', {
+
+  data: {
+    email: this.email,
+    password: this.password,
+  },
+})
+
+if (succesfulLogin) {
+  await this.$auth.setUser({
+    email: this.email,
+    password: this.password,
+  })
+} */
+      this.$auth.setUser(this.$cookies.get('users'))
+
+      console.log(this.$auth.$state)
+    }
+  }
 }
 </script>
 

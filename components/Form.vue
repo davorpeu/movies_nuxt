@@ -49,6 +49,10 @@ export default {
     formActions: {
       type: Array,
       required: true
+    },
+    submitForm: {
+      type: Function,
+      required: true
     }
   },
   data() {
@@ -57,12 +61,7 @@ export default {
       snackbarMessage: ''
     }
   },
-  methods: {
-    submitForm() {
-      // Handle form submission
-      this.$emit('submitForm')
-    }
-  }
+  methods: {}
 }
 </script>
 

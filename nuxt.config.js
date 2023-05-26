@@ -18,7 +18,10 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  router: {},
+  router: {
+    middleware: ['auth']
+  },
+  serverMiddleware: ['~/middleware/redirects'],
   /*
    ** Customize the progress-bar color
    */
