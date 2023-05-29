@@ -36,7 +36,6 @@ export default {
     const handleLogout = () => {
       // Perform the logout action
       // Redirect to the login page or any other desired location
-      this.$auth.logout(/* .... */)
       window.location.href = '/login'
     }
 

@@ -5,7 +5,7 @@
         :form-title="formTitle"
         :form-fields="formFields"
         :form-actions="formActions"
-        :submitForm="submitForm"
+        :submitForm="login"
       />
     </div>
     <Snackbar
@@ -86,26 +86,23 @@ export default {
     this.$cookies.set('users', updatedUsersJson)
   },
   methods: {
-    submitForm() {
-      const usernameField = this.formFields.find(
-        (field) => field.id === 'username'
-      )
-      const passwordField = this.formFields.find(
-        (field) => field.id === 'password'
-      )
+    async login() {
+      // Perform the authentication request using Axios or another HTTP library
+      // Here, we'll simulate a successful login
+      const response = await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({ data: { token: 'John' } })
+        }, 1000)
+      })
 
-      if (usernameField && passwordField) {
-        const successfulLogin = true
-        console.log(this.$auth)
-        if (successfulLogin) {
-          this.$router.push('/movies')
-          // The $auth.loggedIn property will be automatically updated by the @nuxt/auth-next module
+      if (response && response.data && response.data.token) {
+        // Set the authentication token in cookies
+        this.$cookies.set('token', response.data.token)
 
-          // Redirect to the authenticated page or perform any other necessary actions
-        } else {
-          this.snackbarVisible = true
-          this.snackbarMessage = 'Invalid username or password' // Show an error message
-        }
+        // Redirect to the authenticated page or perform any other necessary actions
+        this.$router.push('/movies')
+      } else {
+        // Handle login failure, show an error message, etc.
       }
     }
   }
