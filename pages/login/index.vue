@@ -84,29 +84,29 @@ export default {
 
     const updatedUsersJson = JSON.stringify(this.existingUsers)
     this.$cookies.set('users', updatedUsersJson)
-
-    this.$auth.setUser(this.existingUsers)
   },
   methods: {
     submitForm() {
-      /*
-      const succesfulLogin = await this.$auth.loginWith('local', {
+      const usernameField = this.formFields.find(
+        (field) => field.id === 'username'
+      )
+      const passwordField = this.formFields.find(
+        (field) => field.id === 'password'
+      )
 
-  data: {
-    email: this.email,
-    password: this.password,
-  },
-})
+      if (usernameField && passwordField) {
+        const successfulLogin = true
+        console.log(this.$auth)
+        if (successfulLogin) {
+          this.$router.push('/movies')
+          // The $auth.loggedIn property will be automatically updated by the @nuxt/auth-next module
 
-if (succesfulLogin) {
-  await this.$auth.setUser({
-    email: this.email,
-    password: this.password,
-  })
-} */
-      this.$auth.setUser(this.$cookies.get('users'))
-
-      console.log(this.$auth.$state)
+          // Redirect to the authenticated page or perform any other necessary actions
+        } else {
+          this.snackbarVisible = true
+          this.snackbarMessage = 'Invalid username or password' // Show an error message
+        }
+      }
     }
   }
 }

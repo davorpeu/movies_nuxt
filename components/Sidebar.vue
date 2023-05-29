@@ -5,7 +5,6 @@
         class="flex flex-col fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
       >
         <a
-          v-if="!true == this.$auth.loggedIn"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           href="/login"
           >Login</a
@@ -21,7 +20,6 @@
           >Wishlist</a
         >
         <button
-          v-if="this.$auth.loggedIn"
           class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           @click="logout"
         >

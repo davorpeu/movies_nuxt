@@ -18,9 +18,6 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
 
-  router: {
-    middleware: ['auth']
-  },
   serverMiddleware: ['~/middleware/redirects'],
   /*
    ** Customize the progress-bar color
@@ -33,10 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    { src: '~/plugins/axios.js', mode: 'client' },
-    { src: '~/plugins/auth.js', ssr: false }
-  ],
+  plugins: [{ src: '~/plugins/axios.js', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */
@@ -51,25 +45,13 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    'cookie-universal-nuxt',
-    '@nuxtjs/auth-next'
+    'cookie-universal-nuxt'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
-   */ auth: {
-    strategies: {
-      local: {
-        login: { url: '/sessions', method: 'post', propertyName: 'token' },
-        logout: false,
-        user: {
-          property: false,
-          autoFetch: false
-        }
-        // tokenRequired: true,
-      }
-    }
-  },
+   */
+
   axios: {},
   /*
    ** Build configuration
