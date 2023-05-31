@@ -1,34 +1,51 @@
 <template>
   <div>
-    <h1>Wishlist</h1>
-    <ul>
-      <li v-for="movie in displayedMovies" :key="movie.id">
-        <Movie v-if="!isLoading" :movie="movie">{{ movie.title }}</Movie>
-      </li>
-    </ul>
-    <div class="flex items-center">
+    <h1 class="text-2xl font-bold mb-4">Wishlist</h1>
+    <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th
+              scope="col"
+              class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Title
+            </th>
+            <!-- Add more table headers as needed -->
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <tr
+            class="px-6 py-4 whitespace-nowrap"
+            v-for="movie in displayedMovies"
+            :key="movie.id"
+          >
+            <td class="px-6 py-4 whitespace-nowrap">
+              <Movie v-if="!isLoading" :movie="movie">{{ movie.title }}</Movie>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <nav class="flex justify-end mt-4" aria-label="Pagination">
       <button
-        v-if="currentPage > 1"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         @click="previousPage"
+        class="px-4 py-2 ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600"
       >
         Previous
       </button>
-
       <button
-        v-if="currentPage < totalPages"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
         @click="nextPage"
+        class="px-4 py-2 ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600"
       >
         Next
       </button>
-    </div>
+    </nav>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-
 import Movie from '@/components/Movie.vue'
 
 export default {
@@ -40,8 +57,7 @@ export default {
     return {
       currentPage: 1,
       moviesPerPage: 4,
-      isLoading: true,
-      key: 1 // add a key to force re-render
+      isLoading: true
     }
   },
   computed: {
@@ -57,12 +73,10 @@ export default {
       const endIndex = startIndex + this.moviesPerPage
       return this.wishlistMovies.slice(startIndex, endIndex)
     },
-
     totalPages() {
       return Math.ceil(this.wishlistMovies.length / this.moviesPerPage)
     }
   },
-
   created() {
     this.isLoading = false
   },
