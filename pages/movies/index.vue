@@ -1,22 +1,42 @@
 <template>
   <div>
-    <h1>Movies</h1>
-    <div>
-      <ul>
-        <Movie
-          v-for="movie in displayedMovies"
-          :key="movie.id"
-          :movie="movie"
-          >{{ movie.title }}</Movie
-        >
-      </ul>
+    <h1 class="text-2xl font-bold mb-4">Movies</h1>
+    <div class="overflow-x-auto">
+      <table class="min-w-full border border-gray-300 list-none">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 border-b">Title</th>
+            <!-- Add more table headers as needed -->
+          </tr>
+        </thead>
+        <tbody>
+          <Movie
+            v-for="movie in displayedMovies"
+            :key="movie.id"
+            :movie="movie"
+          >
+            <tr class="hover:bg-gray-100">
+              <td class="py-2 px-4 border-b">{{ movie.title }}</td>
+              <!-- Add more table cells with movie data as needed -->
+            </tr>
+          </Movie>
+        </tbody>
+      </table>
     </div>
 
-    <div>
-      <button v-if="currentPage > 1" @click="previousPage">
+    <div class="flex justify-between items-center mt-4">
+      <button
+        @click="previousPage"
+        v-if="currentPage > 1"
+        class="py-2 px-4 border rounded bg-blue-500 text-white hover:bg-blue-600"
+      >
         Previous
       </button>
-      <button v-if="currentPage < totalPages" @click="nextPage">
+      <button
+        @click="nextPage"
+        v-if="currentPage < totalPages"
+        class="ml-2 py-2 px-4 border rounded bg-blue-500 text-white hover:bg-blue-600"
+      >
         Next
       </button>
     </div>
@@ -48,24 +68,20 @@ export default {
       return Math.ceil(this.movies.length / this.moviesPerPage)
     }
   },
-  async created() {
+  async beforeCreate() {
     const response = await this.$axiosInstance.get('popular')
-    this.movies = response.data.results
-  },
-  mounted() {
-    const queryPage = parseInt(this.$route.query.page)
-    if (queryPage && queryPage > 0 && queryPage <= this.totalPages) {
-      this.currentPage = queryPage
-    }
+    this.movies = await response.data.results
   },
   methods: {
     nextPage() {
-      this.currentPage++
-      this.$router.push({ query: { page: this.currentPage } })
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++
+      }
     },
     previousPage() {
-      this.currentPage--
-      this.$router.push({ query: { page: this.currentPage } })
+      if (this.currentPage > 1) {
+        this.currentPage--
+      }
     }
   }
 }
