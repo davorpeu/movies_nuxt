@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1 class="text-2xl font-bold mb-4">Movies</h1>
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto m-4">
       <table class="min-w-full border border-gray-300 list-none">
         <thead>
           <tr>
-            <th class="py-2 px-4 border-b">Title</th>
+            <th class="py-2 px-4 border-b">
+              <h1 class="text-2xl font-bold mb-4">Movies</h1>
+            </th>
             <!-- Add more table headers as needed -->
           </tr>
         </thead>
