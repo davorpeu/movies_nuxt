@@ -1,16 +1,26 @@
 <template>
-  <div class="flex">
+  <div class="">
     <div
-      class="p-2 space-y-2 bg-gray-600 rounded shadow w-fit m-auto"
       @click="$emit('input', !value)"
+      class="absolute z-50"
+      :class="{ 'right-2.5': value }"
     >
-      <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
-      <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
-      <span class="block w-8 h-0.5 bg-gray-100 animate-pulse"></span>
+      <span
+        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300"
+        :class="{ 'rotate-45': value, 'translate-y-2': value }"
+      ></span>
+      <span
+        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300 opacity-100"
+        :class="{ hidden: value, 'translate-x-6': value }"
+      ></span>
+      <span
+        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300"
+        :class="{ '-rotate-45': value, 'translate-y-[-2px]': value }"
+      ></span>
     </div>
-    <span>{{}}</span>
-
-    <span v-if="wishlist.length >= 0">({{ wishlistCount }})</span>
+    <span class="flex justify-end" v-if="wishlist.length > 0"
+      >({{ wishlistCount }})</span
+    >
   </div>
 </template>
 
@@ -40,4 +50,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

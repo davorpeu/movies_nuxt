@@ -1,26 +1,27 @@
+Copy code
 <template>
   <div>
     <nav>
       <div
-        class="flex flex-col fixed top-0 bottom-0 lg:left-0 p-2 w-[300px] overflow-y-auto text-center bg-gray-900"
+        class="fixed top-0 left-0 z-49 w-full h-full lg:w-[300px] lg:left-auto p-4 lg:p-6 bg-white bg-opacity-90 shadow-lg"
       >
         <a
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           href="/login"
           >Login</a
         >
         <a
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           href="/movies"
           >Movies</a
         >
         <a
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           href="/wishlist"
           >Wishlist</a
         >
         <button
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          class="block text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           @click="logout"
         >
           Logout
@@ -42,7 +43,8 @@ export default {
     return {
       logout: handleLogout
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
