@@ -6,15 +6,15 @@
       :class="{ 'right-2.5': value }"
     >
       <span
-        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300"
+        class="block w-6 h-0.5 bg-gray-800 my-1 transition-all duration-300"
         :class="{ 'rotate-45': value, 'translate-y-2': value }"
       ></span>
       <span
-        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300 opacity-100"
+        class="block w-6 h-0.5 bg-gray-800 my-1 transition-all duration-300 opacity-100"
         :class="{ hidden: value, 'translate-x-6': value }"
       ></span>
       <span
-        class="block w-6 h-1 bg-gray-800 my-1 transition-all duration-300"
+        class="block w-6 h-0.5 bg-gray-800 my-1 transition-all duration-300"
         :class="{ '-rotate-45': value, 'translate-y-[-2px]': value }"
       ></span>
     </div>
