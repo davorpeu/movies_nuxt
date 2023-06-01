@@ -5,28 +5,29 @@ Copy code
       <div
         class="fixed top-0 left-0 z-49 w-full h-full lg:w-[300px] lg:left-auto p-4 lg:p-6 bg-white bg-opacity-90 shadow-lg"
       >
-        <a
+        <NuxtLink
           class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
-          href="/movies"
-          >Movies</a
+          to="/movies"
+          >Movies</NuxtLink
         >
-        <a
+        <NuxtLink
           class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
-          href="/wishlist"
-          >Wishlist</a
+          to="/wishlist"
+          >Wishlist</NuxtLink
         >
-        <button
+        <NuxtLink
           v-if="$cookies.get('token')"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           @click="logout"
+          to="/login"
         >
           Logout
-        </button>
-        <a
+        </NuxtLink>
+        <NuxtLink
           v-else
           class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
-          href="/login"
-          >Login</a
+          to="/login"
+          >Login</NuxtLink
         >
       </div>
     </nav>
