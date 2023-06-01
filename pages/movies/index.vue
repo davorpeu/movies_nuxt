@@ -28,7 +28,7 @@
     <div class="flex justify-between items-center mt-4">
       <button
         @click="previousPage"
-        v-if="currentPage > 1"
+        :disabled="currentPage <= 1"
         class="py-2 px-4 border rounded bg-blue-500 text-white hover:bg-blue-600"
       >
         Previous

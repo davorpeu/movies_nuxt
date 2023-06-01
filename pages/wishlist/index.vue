@@ -27,20 +27,22 @@
         </tbody>
       </table>
     </div>
-    <nav class="flex justify-end mt-4" aria-label="Pagination">
+    <div class="flex justify-between items-center mt-4">
       <button
         @click="previousPage"
-        class="px-4 py-2 ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600"
+        :disabled="currentPage <= 1"
+        class="py-2 px-4 border rounded bg-blue-500 text-white hover:bg-blue-600"
       >
         Previous
       </button>
       <button
         @click="nextPage"
-        class="px-4 py-2 ml-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600"
+        v-if="currentPage < totalPages"
+        class="ml-2 py-2 px-4 border rounded bg-blue-500 text-white hover:bg-blue-600"
       >
         Next
       </button>
-    </nav>
+    </div>
   </div>
 </template>
 
