@@ -33,18 +33,15 @@ Copy code
 
 <script>
 export default {
-  setup() {
-    const handleLogout = () => {
+  setup() {},
+  methods: {
+    logout() {
       // Perform the logout action
       // Redirect to the login page or any other desired location
+      this.$cookies.remove('token')
       window.location.href = '/login'
     }
-
-    return {
-      logout: handleLogout
-    }
-  },
-  methods: {}
+  }
 }
 </script>
 
