@@ -7,11 +7,6 @@ Copy code
       >
         <a
           class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
-          href="/login"
-          >Login</a
-        >
-        <a
-          class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           href="/movies"
           >Movies</a
         >
@@ -21,11 +16,18 @@ Copy code
           >Wishlist</a
         >
         <button
+          v-if="$cookies.get('token')"
           class="block text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
           @click="logout"
         >
           Logout
         </button>
+        <a
+          v-else
+          class="block mb-4 text-lg font-medium text-gray-800 hover:text-blue-600 dark:text-gray-300 dark:hover:text-blue-500"
+          href="/login"
+          >Login</a
+        >
       </div>
     </nav>
   </div>
