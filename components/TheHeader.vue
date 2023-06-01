@@ -2,8 +2,8 @@
   <div class="">
     <div
       @click="$emit('input', !value)"
-      class="absolute z-50"
-      :class="{ 'right-2.5': value }"
+      class="absolute z-50 flex flex-col"
+      :class="{ 'left-64': value }"
     >
       <span
         class="block w-6 h-0.5 bg-gray-800 my-1 transition-all duration-300"
