@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="text-2xl font-bold mb-4">Wishlist</h1>
+  <div class="mt-8">
     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -9,7 +8,7 @@
               scope="col"
               class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-              Title
+              <h1 class="text-2xl font-bold mb-4">Wishlist</h1>
             </th>
             <!-- Add more table headers as needed -->
           </tr>

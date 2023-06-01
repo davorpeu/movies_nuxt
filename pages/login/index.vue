@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-8">
     <div>
       <Form
         :form-title="formTitle"
@@ -86,23 +86,33 @@ export default {
     this.$cookies.set('users', updatedUsersJson)
   },
   methods: {
-    async login() {
-      // Perform the authentication request using Axios or another HTTP library
-      // Here, we'll simulate a successful login
-      const response = await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve({ data: { token: 'John' } })
-        }, 1000)
-      })
+    login() {
+      const inputUser = {
+        username: this.formFields[0].value,
+        password: this.formFields[1].value
+      }
 
-      if (response && response.data && response.data.token) {
+      // Get the list of users from the cookies
+      const users = this.$cookies.get('users')
+      console.log(users)
+      // Check if the input user is valid
+      const user = users.find(
+        (u) =>
+          u.username === inputUser.username && u.password === inputUser.password
+      )
+      console.log(user)
+      if (user) {
+        console.log('Success')
+
         // Set the authentication token in cookies
-        this.$cookies.set('token', response.data.token)
+        console.log('Success')
+        this.$cookies.set('token', user.username)
 
         // Redirect to the authenticated page or perform any other necessary actions
         this.$router.push('/movies')
       } else {
         // Handle login failure, show an error message, etc.
+        console.log('Invalid username or password')
       }
     }
   }
