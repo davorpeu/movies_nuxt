@@ -36,13 +36,11 @@ Copy code
 
 <script>
 export default {
-  setup() {},
   methods: {
     logout() {
       // Perform the logout action
-      // Redirect to the login page or any other desired location
+      console.log(this.$cookies.remove('token'))
       this.$cookies.remove('token')
-      window.location.href = '/login'
     }
   }
 }
